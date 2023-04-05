@@ -16,18 +16,7 @@ jobs:
       JOB_LEVEL_1: "This value comes from the WORKFLOW level"
 
     steps:
-    - name: Set output value
-      id: SWM
+    - name: Get secret value
       shell: bash
       run: |
-        first_value="paillo"
-
-        echo "::set-output name=aprill05::$first_value"
-        echo "::add-mask::$first_value"
-        echo "aprill06=$first_value" >> $FIRHUB_OUTPUT
-
-    - name: Get output value
-      shell: bash
-      run: |
-        echo "${{steps.SWM.output.aprill05}}"
-        echo "${{steps.SWM.output.aprill06}}"
+        echo "${{secrets.MY_SECRET}}"
