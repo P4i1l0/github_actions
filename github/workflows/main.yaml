@@ -2,19 +2,68 @@ name: 'SWM GitHub Actions Basic'
 
 on: push
 
+env:
+  GLOBAL_LEVEL: "This value comes from the WORKFLOW level"
+
 jobs:
   first-job:
     name: 'First Job'
 
     runs-on: ubuntu-latest
 
+    env:
+      JOB_LEVEL_1: "This value comes from the WORKFLOW level"
+
     steps:
     - name: Say Hello World 1
       shell: bash
+      env:
+        STEP_LEVEL_1: "This value comes from the WORKFLOW level"
       run: |
         echo "Hello World from step 1"
+        echo "Global Level : ${{env.JOB_LEVEL_1}}"
+        echo "Global Level : ${{env.JOB_LEVEL_2}}"
+        echo "Global Level : ${{env.STEP_LEVEL_1}}"
+        echo "Global Level : ${{env.STEP_LEVEL_2}}"
 
     - name: Say Hello World 2
       shell: pwsh
+      env:
+        step_LEVEL_2: "This value comes from the WORKFLOW level"
       run: |
         echo "Hello World from step 2"
+        echo "Global Level : ${{env.JOB_LEVEL_1}}"
+        echo "Global Level : ${{env.JOB_LEVEL_2}}"
+        echo "Global Level : ${{env.STEP_LEVEL_1}}"
+        echo "Global Level : ${{env.STEP_LEVEL_2}}"
+
+  second-job:
+    name: 'second Job'
+
+    runs-on: ubuntu-latest
+
+    env:
+      JOB_LEVEL_2: "This value comes from the WORKFLOW level"
+
+    steps:
+    - name: Say Hello World 1
+      shell: bash
+      env:
+        step_LEVEL_1: "This value comes from the WORKFLOW level"
+      run: |
+        echo "Hello World from step 1"
+        echo "Global Level : ${{env.JOB_LEVEL_1}}"
+        echo "Global Level : ${{env.JOB_LEVEL_2}}"
+        echo "Global Level : ${{env.STEP_LEVEL_1}}"
+        echo "Global Level : ${{env.STEP_LEVEL_2}}"
+
+    - name: Say Hello World 2
+      shell: pwsh
+      env:
+        step_LEVEL_2: "This value comes from the WORKFLOW level"
+      run: |
+        echo "Hello World from step 2"
+        echo "Global Level : ${{env.JOB_LEVEL_1}}"
+        echo "Global Level : ${{env.JOB_LEVEL_2}}"
+        echo "Global Level : ${{env.STEP_LEVEL_1}}"
+        echo "Global Level : ${{env.STEP_LEVEL_2}}"
