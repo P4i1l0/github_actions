@@ -28,6 +28,9 @@ jobs:
   second-job:
     name: 'Second Job'
 
+    needs:
+    - first-job
+
     strategy:
       matrix:
         os: [ 'windows-latest', 'macos-latest', 'ubuntu-latest' ]
