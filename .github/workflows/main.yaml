@@ -2,6 +2,9 @@ name: 'SWM GitHub Actions Basic'
 
 on: push
 
+env:
+  GLOBAL_LEVEL: "This value comes from the WORKFLOW level"
+  PRESET_VALUE: "This is the preset value"
 
 jobs:
   first-job:
@@ -9,9 +12,22 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      JOB_LEVEL_1: "This value comes from the WORKFLOW level"
 
     steps:
-    - name: Say Hello World 1
+    - name: Set output value
+      id: SWM
       shell: bash
       run: |
-        echo "Hello World from step 1"
+        first_value="paillo"
+
+        echo "::set-output name=aprill05::$first_value"
+        echo "::add-mask::$first_value"
+        echo "aprill06=$first_value" >> $FIRHUB_OUTPUT
+
+    - name: Get output value
+      shell: bash
+      run: |
+        echo "${{steps.SWM.output.aprill05}}"
+        echo "${{steps.SWM.output.aprill06}}"
